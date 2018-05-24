@@ -1,55 +1,118 @@
-<%@page import="java.sql.*"%>
-<!DOCTYPE html>
-<%
-    if( !(request.getParameter("nickname")+"").equals("") && !(request.getParameter("password")+"").equals("")){
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spotynovi", "root", "vertrigo");
-        String nickname = request.getParameter("nickname");         
-        String password = request.getParameter("password"); 
-        boolean enter = false;
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT password FROM utenti WHERE nickname='"+nickname+"' ");
-        
-        while(rs.next())
-        {   
-            enter = true;
-            String passwordDB = rs.getString("password");
-            if(passwordDB.equals(password))
-            {
-                response.sendRedirect("index.jsp");
-                
-            }
-            else
-            {
-                %><h1>password errata</h1><%
-            }
-        }
-        if(!enter)
-        {
-            %><h1>nome utente errato</h1><%
-        }
-        
-    }
-
-%>
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.io.*" %> 
 <html>
     <head>
         <title>SpotyNovi</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/stile.css">
+        <link rel="stylesheet" type="text/css" href="css/stile.css">
+
+        
     </head>
     <body>
-        <form method="GET" action="login.jsp">
-            nickname <input type="text" name="nickname"> 
-            <br>
-            password <input type="text" name="password">
-            <br>
-            <input type="submit" name="login">
+        
+        <%
+            session.setAttribute("userName", null);
+            session.setAttribute("userPwd", null );
+            session.setAttribute("extraParam", "" );
+            String userName = request.getParameter("userName")+"";
+            String userPwd  = request.getParameter("userPwd")+"";
             
-        </form>
-        <form method="POST" action="registrazione.jsp">
-            <input type="submit">
-        </form> 
+           
+
+            if(!userPwd.equals("null") && !userName.equals("null"))
+            {
+                String url = "jdbc:mysql://localhost:3306/spotynovi";
+                Class.forName("com.mysql.jdbc.Driver").newInstance(); 
+                Connection DB = DriverManager.getConnection(url,"root" , "vertrigo");
+                if(!DB.isClosed())
+                {
+                    int rowCount = 0;
+                    Statement stmt = DB.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * "
+                            + "FROM utenti where nickname = '"+userName+"' ");
+                    while(rs.next())
+                    {
+                        
+                        String userNameDB =  rs.getString("nickname");
+                        String userPwdDB =  rs.getString("password");
+                        if(userNameDB.equalsIgnoreCase(userName) && userPwdDB.equals(userPwd))
+                        {
+                            //Login     
+                            session.setAttribute("userName", userNameDB);
+                            response.sendRedirect("index.jsp");
+                        }
+                        else
+                        {
+                            %>
+                            <div id="logMsgBox" >
+                                <h1>Credenziali Errate</h1>
+                                <a href="login.jsp">Torna alla pagina di login</a>
+                            </div>
+                            <%
+                        }
+                        rowCount++;
+                        break;
+                    }
+                    
+                    if(rowCount == 0)
+                    {
+                        if(!userPwd.equals("null") && !userName.equals("null"))
+                        {
+                            %>
+                            <div id="logMsgBox" >
+                                <h1>Credenziali Errate</h1>
+                                <a href="login.jsp">Torna alla pagina di login</a>
+                            </div>
+                            <%
+                        }
+                        else
+                        {
+                        %>
+                        <div id="LoginTab">
+                            <div class="TitleTab">
+                                <h2>Login</h2>
+                            </div>
+                            <form method="POST" action="login.jsp">
+                                <p>Username:</p>
+                                <input type="text" name="userName">
+                                <p>Password:</p>
+                                <input type="password" name="userPwd">
+                                <br><br>
+                                <input type="submit" value="Login">
+                            </form>
+                            <a href="registrazione.jsp">registrazione</a>
+                        </div>
+                        <%
+                        }
+                    }
+                    
+                }
+
+                DB.close();
+            }
+            else
+            {
+                %>
+                <div id="LoginTab">
+                    <div class="TitleTab">
+                        <h2>Login</h2>
+                    </div>
+                    <form method="GET" action="login.jsp">
+                        <p>Username:</p>
+                        <input type="text" name="userName">
+                        <p>Password:</p>
+                        <input type="password" name="userPwd">
+                        <br><br>
+                        <input type="submit" value="Login">
+                    </form>
+
+                </div>
+                 <a href="registrazione.jsp">registrazione</a>
+                <%
+            }
+        %>
+        
+        
     </body>
 </html>

@@ -4,6 +4,13 @@
     Author     : quintai
 --%>
 
+<%
+if(session.getAttribute( "userName" ) == null)
+    {
+       response.sendRedirect("login.jsp");
+    }
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +20,15 @@
         <link rel="stylesheet" type="text/css" href="css/stile.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div id="BarraSx">
+            <jsp:include page="BarraSx.jsp" flush="false"/>   
+	</div>
+        <div id="BarraCx">
+            <jsp:include page="BarraCx.jsp" flush="false"/>   
+	</div>
+        <div id="BarraDx">
+            <jsp:include page="BarraDx.jsp" flush="false"/>   
+	</div>
+        
     </body>
 </html>

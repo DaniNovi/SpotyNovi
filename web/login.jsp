@@ -1,5 +1,5 @@
-<%@ page import="java.sql.*" %> 
-<%@ page import="java.io.*" %> 
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %>
 <html>
     <head>
         <title>SpotyNovi</title>
@@ -7,24 +7,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/stile.css">
 
-        
+
     </head>
     <body>
-        
+
         <%
             session.setAttribute("userName", null);
             session.setAttribute("userPwd", null );
             session.setAttribute("extraParam", "" );
             String userName = request.getParameter("userName")+"";
             String userPwd  = request.getParameter("userPwd")+"";
-            
-           
+
+
 
             if(!userPwd.equals("null") && !userName.equals("null"))
             {
-                String url = "jdbc:mysql://localhost:8080/spotynovi";
-                Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-                Connection DB = DriverManager.getConnection(url,"root" , "vertrigo");
+                String url = "jdbc:mysql://localhost:3306/spotynovi";
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Connection DB = DriverManager.getConnection(url ,"root" , "vertrigo");
                 if(!DB.isClosed())
                 {
                     int rowCount = 0;
@@ -33,12 +33,12 @@
                             + "FROM utenti where nickname = '"+userName+"' ");
                     while(rs.next())
                     {
-                        
+
                         String userNameDB =  rs.getString("nickname");
                         String userPwdDB =  rs.getString("password");
                         if(userNameDB.equalsIgnoreCase(userName) && userPwdDB.equals(userPwd))
                         {
-                            //Login     
+                            //Login
                             session.setAttribute("userName", userNameDB);
                             response.sendRedirect("index.jsp");
                         }
@@ -54,7 +54,7 @@
                         rowCount++;
                         break;
                     }
-                    
+
                     if(rowCount == 0)
                     {
                         if(!userPwd.equals("null") && !userName.equals("null"))
@@ -86,7 +86,7 @@
                         <%
                         }
                     }
-                    
+
                 }
 
                 DB.close();
@@ -112,7 +112,7 @@
                 <%
             }
         %>
-        
-        
+
+
     </body>
 </html>

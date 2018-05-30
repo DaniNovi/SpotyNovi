@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : 4-apr-2018, 12.50.07
     Author     : quintai
@@ -21,14 +21,14 @@ if(session.getAttribute( "userName" ) == null)
     </head>
     <body>
         <div id="BarraSx">
-            <jsp:include page="BarraSx.jsp" flush="false"/>   
+            <jsp:include page="BarraSx.jsp" flush="false"/>
 	</div>
         <div id="BarraCx">
-            <jsp:include page="BarraCx.jsp" flush="false"/>   
+            <jsp:include page="BarraCx.jsp" flush="false"/>
 	</div>
         <div id="BarraDx">
-            <jsp:include page="BarraDx.jsp" flush="false"/>   
+            <jsp:include page="BarraDx.jsp" flush="false"/>
 	</div>
-        
+
     </body>
 </html>

@@ -1,8 +1,8 @@
-<%@ page import="java.sql.*" %> 
-<%@ page import="java.io.*" %> 
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %>
 <h1>PLAYLIST</h1>
-    <% String url = "jdbc:mysql://localhost:8080/spotynovi";
-                Class.forName("com.mysql.jdbc.Driver").newInstance(); 
+    <% String url = "jdbc:mysql://localhost:3306/spotynovi";
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
                 Connection DB = DriverManager.getConnection(url,"root" , "vertrigo");
                 if(!DB.isClosed())
                 {
@@ -20,4 +20,3 @@
                     %></ul><%
                 }
     %>
-        

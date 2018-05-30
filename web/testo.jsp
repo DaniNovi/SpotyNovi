@@ -23,9 +23,7 @@ if(session.getAttribute( "userName" ) == null)
         <div id="BarraSx">
             <jsp:include page="BarraSx.jsp" flush="false"/>   
 	</div>
-        <div id="BarraCx">
-            <jsp:include page="BarraCx.jsp" flush="false"/>   
-	</div>
+        
         <div id="BarraDx">
             <jsp:include page="BarraDx.jsp" flush="false"/>   
 	</div>

@@ -22,7 +22,7 @@
 
             if(!userPwd.equals("null") && !userName.equals("null"))
             {
-                String url = "jdbc:mysql://localhost:3306/spotynovi";
+                String url = "jdbc:mysql://localhost:8080/spotynovi";
                 Class.forName("com.mysql.jdbc.Driver").newInstance(); 
                 Connection DB = DriverManager.getConnection(url,"root" , "vertrigo");
                 if(!DB.isClosed())

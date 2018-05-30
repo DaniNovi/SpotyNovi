@@ -9,6 +9,10 @@ form
     height: 200px;
     margin-left: 42.5%;
 }
+table
+{
+    width: 100%;
+}
 
 .formBtn{
     background-color: rgb(30,215,96);

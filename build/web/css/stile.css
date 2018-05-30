@@ -3,19 +3,56 @@ body{
     color: rgb(30,215,96);
     text-align: center;
 }
-form{
-      width: 200px;
+form
+{
+    width: 200px;
     height: 200px;
-   
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -100px;
-
+    margin-left: 42.5%;
+}
+table
+{
+    width: 100%;
 }
 
-input[type='submit']{
+.formBtn{
     background-color: rgb(30,215,96);
     border: none;
 }
+#BarraSx
+{
+        
+        background-color:  rgb(3,3,3);
+        width: 15%;
+        border: dashed 3px;
+        margin-right: 10px;
+        height: 800px;
+        float: left;
+
+}
+#BarraDx
+{
+        float: left;
+        background-color:  rgb(3,3,3);
+        width: 20%;
+        border: dashed 3px;
+        margin-left: 10px;
+        height: 800px;
+        float: left;
+}
+#BarraCx
+{
+        
+        background-color:  rgb(3,3,3);
+        width: 60%;
+        border: dashed 3px;
+        margin-left: 10px;
+        height: 800px;
+        float: left;
+}
+
+.Preg{
+     
+     position:absolute ;
+     
+}
+
